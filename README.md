@@ -29,3 +29,12 @@ on('TIME', time => {
   console.log(time);
 });
 ```
+
+unsubscribe lisener
+```javascript
+const unsubscribe = on('TIME', time => {
+  console.log(time);
+});
+
+unsubscribe();
+```
