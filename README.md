@@ -30,7 +30,7 @@ on('TIME', time => {
 });
 ```
 
-unsubscribe lisener
+unsubscribe listener
 ```javascript
 const unsubscribe = on('TIME', time => {
   console.log(time);
