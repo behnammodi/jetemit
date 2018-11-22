@@ -10,7 +10,7 @@ var subscribes = {};
  * @returns {function} unsubscribe function
  */
 exports.on = function on(name, func) {
-  if (typeof (x) !== 'function') throw ('func in ' + name + ' is not function');
+  if (typeof (func) !== 'function') throw ('func in ' + name + ' is not function');
   subscribes[name] = subscribes[name] || { happen: null, funcs: {}, count: 0 };
   var id = name + (subscribes[name].count++);
   subscribes[name].funcs[id] = func;
