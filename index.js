@@ -10,12 +10,15 @@ var subscribes = {};
  * @returns {function} unsubscribe function
  */
 exports.on = function on(name, func) {
-  if (typeof (func) !== 'function') throw ('func in ' + name + ' is not function');
-  subscribes[name] = subscribes[name] || { happen: null, funcs: {}, count: 0 };
-  var id = name + (subscribes[name].count++);
-  subscribes[name].funcs[id] = func;
+  if (typeof (func) !== 'function')
+    throw ('on(' + name + ', ↴), Second argument is not function, please check');
+  var subscribe = subscribes[name];
+  if (!subscribe)
+    subscribe = { happen: null, funcs: {}, count: 0 };
+  var funcId = name + (subscribe.count++);
+  subscribe.funcs[funcId] = func;
   return function () {
-    delete subscribes[name].funcs[id]
+    delete subscribe.funcs[funcId]
   };
 };
 
@@ -26,11 +29,11 @@ exports.on = function on(name, func) {
  * @returns {undefined} nothing
  */
 exports.emit = function emit(name, arg) {
-  if (subscribes[name]) {
-    subscribes[name].happen = arg
-    Object.keys(subscribes[name].funcs).forEach(function (key) {
-      subscribes[name].funcs[key](arg);
-    });
+  var subscribe = subscribes[name];
+  if (subscribe) {
+    subscribe.happen = arg;
+    for (var func in subscribe.funcs)
+      subscribe.funcs[func](arg);
   }
 };
 
@@ -40,5 +43,5 @@ exports.emit = function emit(name, arg) {
  * @returns {any} any
  */
 exports.happen = function happen(name) {
-  return subscribes[name].happen
+  return subscribes[name].happen;
 };
