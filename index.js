@@ -3,6 +3,12 @@
 exports.__esModule = true;
 var subscribes = {};
 
+/**
+ * add listener 
+ * @param {string} name 
+ * @param {function} func 
+ * @returns {function} unsubscribe function
+ */
 exports.on = function on(name, func) {
   if (typeof (x) !== 'function') throw ('func in ' + name + ' is not function');
   subscribes[name] = subscribes[name] || { happen: null, funcs: {}, count: 0 };
@@ -13,6 +19,12 @@ exports.on = function on(name, func) {
   };
 };
 
+/**
+ * dispatch all listener 
+ * @param {string} name 
+ * @param {any} arg 
+ * @returns {undefined} nothing
+ */
 exports.emit = function emit(name, arg) {
   if (subscribes[name]) {
     subscribes[name].happen = arg
@@ -22,6 +34,11 @@ exports.emit = function emit(name, arg) {
   }
 };
 
+/**
+ * get last emit arg value
+ * @param {string} name 
+ * @returns {any} any
+ */
 exports.happen = function happen(name) {
   return subscribes[name].happen
 };
