@@ -13,11 +13,7 @@ call in a.js file
 ```javascript
 import { emit } from 'jetemit';
 
-const getTime = () => {
-  return new Date().toString();
-};
-
-emit('TIME', getTime());
+emit('TIME', new Date().toString());
 ```
 
 listen b.js file
@@ -32,9 +28,18 @@ on('TIME', time => {
 
 unsubscribe listener
 ```javascript
+import { on } from 'jetemit';
+
 const unsubscribe = on('TIME', time => {
   console.log(time);
 });
 
 unsubscribe();
+```
+
+get last arg in emit
+```javascript
+import { happen } from 'jetemit';
+
+console.log(happen('TIME'));
 ```

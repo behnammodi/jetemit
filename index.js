@@ -23,4 +23,4 @@ exports.emit = function emit(name, arg) {
 
 exports.happen = function happen(name) {
   return happens[name];
-}
+};
