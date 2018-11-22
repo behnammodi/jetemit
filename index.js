@@ -2,25 +2,25 @@
 
 exports.__esModule = true;
 var subscribes = {};
-var happens = {};
 
-exports.on = function on(name, func) {
-  subscribes[name] = subscribes[name] || [];
-  var index = subscribes[name].push(func) - 1;
+exports.on = function on(name, func) {  
+  subscribes[name] = subscribes[name] || { happen: null, funcs: {}, count: 0 };
+  var id = name + (subscribes[name].count++);
+  subscribes[name].funcs[id] = func;
   return function () {
-    subscribes[name][index] = undefined;
+    delete subscribes[name].funcs[id]
   };
 };
 
 exports.emit = function emit(name, arg) {
   if (subscribes[name]) {
-    happens[name] = arg;
-    subscribes[name].forEach(function (func) {
+    subscribes[name].happen = arg
+    Object.keys(subscribes[name].funcs).forEach(function (func) {
       func && func(arg);
     });
   }
 };
 
 exports.happen = function happen(name) {
-  return happens[name];
+  return subscribes[name].happen
 };
