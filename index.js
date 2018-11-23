@@ -12,13 +12,12 @@ var subscribes = {};
 exports.on = function on(name, func) {
   if (typeof (func) !== 'function')
     throw ('on(' + name + ', ↴), Second argument is not function, please check');
-  var subscribe = subscribes[name];
-  if (!subscribe)
-    subscribe = { happen: null, funcs: {}, count: 0 };
-  var funcId = name + (subscribe.count++);
-  subscribe.funcs[funcId] = func;
+  if (!subscribes[name])
+    subscribes[name] = { happen: null, funcs: {}, count: 0 };
+  var funcId = name + (subscribes[name].count++);
+  subscribes[name].funcs[funcId] = func;
   return function () {
-    delete subscribe.funcs[funcId]
+    delete subscribes[name].funcs[funcId]
   };
 };
 
@@ -29,11 +28,10 @@ exports.on = function on(name, func) {
  * @returns {undefined} nothing
  */
 exports.emit = function emit(name, arg) {
-  var subscribe = subscribes[name];
-  if (subscribe) {
-    subscribe.happen = arg;
-    for (var func in subscribe.funcs)
-      subscribe.funcs[func](arg);
+  if (subscribes[name]) {
+    subscribes[name].happen = arg;
+    for (var func in subscribes[name].funcs)
+      subscribes[name].funcs[func](arg);
   }
 };
 
