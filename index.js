@@ -15,10 +15,10 @@ exports.on = function on(name, func) {
   if (!subscribes[name])
     subscribes[name] = { count: 0, funcs: {} };
 
-  subscribes[name].count++;
-  subscribes[name].funcs[subscribes[name].count] = func;
+  const key = subscribes[name].count++;
+  subscribes[name].funcs[key] = func;
   return function () {
-    delete subscribes[name].funcs[subscribes[name].count];
+    delete subscribes[name].funcs[key];
   };
 };
 
