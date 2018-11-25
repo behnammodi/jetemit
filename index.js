@@ -3,8 +3,6 @@
 exports.__esModule = true;
 var subscribes = {};
 
-exports.subscribes = subscribes;
-
 /**
  * add listener 
  * @param {string} name 
@@ -31,8 +29,7 @@ exports.on = function on(name, func) {
  * @returns {undefined} nothing
  */
 exports.emit = function emit(name, arg) {
-  if (subscribes[name]) {
+  if (subscribes[name])
     for (var func in subscribes[name].funcs)
       subscribes[name].funcs[func](arg);
-  }
 };
