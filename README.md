@@ -36,10 +36,3 @@ const unsubscribe = on('TIME', time => {
 
 unsubscribe();
 ```
-
-get last arg in emit
-```javascript
-import { happen } from 'jetemit';
-
-console.log(happen('TIME'));
-```
