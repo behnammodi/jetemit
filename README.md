@@ -1,4 +1,4 @@
-## JETEMIT
+## jetemit
 
 [![NPM](https://nodei.co/npm/jetemit.png)](https://nodei.co/npm/jetemit/)
 
