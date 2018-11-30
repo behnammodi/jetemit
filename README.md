@@ -4,27 +4,39 @@
 
 [![install size](https://packagephobia.now.sh/badge?p=jetemit)](https://packagephobia.now.sh/result?p=jetemit) [![dependencies](https://david-dm.org/uxitten/jetemit.svg)](https://david-dm.org/uxitten/jetemit.svg)
 
-event manager
+events manager very simple
 
-## Install
+## install
 ```npm
 npm install jetemit --save
 ```
 
-## use
-call in a.js file
+## import
+```javascript
+const { on, emit } = require('jetemit');
+//or
+import { on, emit } from 'jetemit';
+```
 
+## use
+call
 ```javascript
 import { emit } from 'jetemit';
-
+/**
+ * emit(name, value);
+ * name is string
+ * value any 
+ */
 emit('TIME', new Date().toString());
 ```
 
-listen b.js file
-
+listener
 ```javascript
 import { on } from 'jetemit';
-
+/**
+ * on(name,function)
+ * name is string
+ */
 on('TIME', time => {
   console.log(time);
 });
@@ -33,7 +45,9 @@ on('TIME', time => {
 unsubscribe listener
 ```javascript
 import { on } from 'jetemit';
-
+/**
+ * on return unsubscribe function
+ */
 const unsubscribe = on('TIME', time => {
   console.log(time);
 });
