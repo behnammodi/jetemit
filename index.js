@@ -31,5 +31,5 @@ exports.on = function on(name, func) {
 exports.emit = function emit(name, arg) {
   if (subscribes[name])
     for (var func in subscribes[name].funcs)
-      subscribes[name].funcs[func](arg);
+      subscribes[name].funcs[func] && subscribes[name].funcs[func](arg);
 };
