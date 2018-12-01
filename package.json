@@ -1,7 +1,7 @@
 {
   "name": "jetemit",
-  "version": "3.0.4",
-  "description": "",
+  "version": "3.0.5",
+  "description": "events manager",
   "main": "index.js",
   "scripts": {
     "test": "node ./index.test.js"
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/uxitten/jetemit.git"
   },
-  "author": "",
+  "author": "Behnam Mohammadi",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/uxitten/jetemit/issues"
