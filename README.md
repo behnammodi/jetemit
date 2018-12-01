@@ -27,7 +27,7 @@ import { emit } from 'jetemit';
  * name is string
  * value any 
  */
-emit('TIME', new Date().toString());
+emit('TIME', '2018-12-01 12:30');
 ```
 
 listener
