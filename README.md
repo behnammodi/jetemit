@@ -1,5 +1,3 @@
-## jetemit
-
 ![jetemit](http://itten.ir/file/jetemit-logo.png)
 
 [![NPM](https://nodei.co/npm/jetemit.png)](https://nodei.co/npm/jetemit/)
