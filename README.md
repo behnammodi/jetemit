@@ -6,6 +6,14 @@
 
 events manager very simple
 
+### Compatibility
+
+|All browser|Backend (Nodejs)|Mobile (React Native)|
+|-----------|----------------|---------------------|
+|✅         |✅               |✅                   |
+
+Compatibility with all javascript project
+
 ## install
 ```npm
 npm install jetemit --save
