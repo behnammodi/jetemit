@@ -1,12 +1,17 @@
 "use strict";
 
 exports.__esModule = true;
+/**
+ * @description subscribes repo
+ * @private
+ */
 var subscribes = {};
 
 /**
- * add listener 
- * @param {string} name 
- * @param {function} func 
+ * @description add listener 
+ * @public
+ * @param {string} name name listener
+ * @param {function} func function for call
  * @returns {function} unsubscribe function
  */
 exports.on = function on(name, func) {
@@ -23,9 +28,10 @@ exports.on = function on(name, func) {
 };
 
 /**
- * dispatch all listener 
- * @param {string} name 
- * @param {any} arg 
+ * @description dispatch all listener 
+ * @public
+ * @param {string} name name listener
+ * @param {any} arg argument for send to on(...)
  * @returns {undefined} nothing
  */
 exports.emit = function emit(name, arg) {
