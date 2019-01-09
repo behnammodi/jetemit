@@ -1,5 +1,11 @@
-./CODE_OF_CONDUCT.md
-./CONTRIBUTING.md
-./index.test.js
+.github/*
+
+CODE_OF_CONDUCT.md
+
+CONTRIBUTING.md
+
+index.test.js
+
 LICENSE
-./PULL_REQUEST_TEMPLATE.md
+
+PULL_REQUEST_TEMPLATE.md
