@@ -4,6 +4,20 @@
 
 [![install size](https://packagephobia.now.sh/badge?p=jetemit)](https://packagephobia.now.sh/result?p=jetemit) [![dependencies](https://david-dm.org/uxitten/jetemit.svg)](https://david-dm.org/uxitten/jetemit.svg)
 
+<a href="https://www.npmjs.com/package/jetemit">
+  <img src="https://img.shields.io/npm/v/jetemit.svg" alt="Version">
+</a>
+
+<a href="https://www.npmjs.com/package/jetemit">
+  <img src="https://img.shields.io/npm/l/jetemit.svg" alt="License">
+</a>
+
+<a href="https://www.npmjs.com/package/jetemit">
+  <img src="https://img.shields.io/npm/dm/jetemit.svg" alt="Downloads">
+</a>
+
+ 
+
 events manager very simple
 
 ### Compatibility
