@@ -54,6 +54,24 @@ function emit(name, arg) {
       subscribes[name].funcs[func] && subscribes[name].funcs[func](arg);
 };
 
+/**
+ * @description unsubscribe listener
+ * @public
+ * @param {string} name name listener
+ * @param {function} func the function that you want to unsubscribe If not defined, all subscriptions will be canceled
+ * @returns {undefined} nothing
+ */
+function unsubscribeOf(name, func) {
+  if (func)
+    for (const key in subscribes[name].funcs){
+      if (subscribes[name].funcs[key] === func)
+        delete subscribes[name].funcs[key];
+    }
+  else delete subscribes[name];
+};
+
+exports.unsubscribeOf = unsubscribeOf;
+
 exports.on = on;
 
 exports.once = once;
