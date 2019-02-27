@@ -91,11 +91,11 @@ import { unsubscribeOf } from 'jetemit';
  * Unsubscribe all subscribed functions for TIME
  */
 unsubscribeOf('TIME')
-
+```
+or
+```javascript
 /**
  * Unsubscribe a Function which subscribed for TIME
  */
 unsubscribeOf('TIME',timeFunction)
-
-unsubscribe();
 ```
