@@ -41,7 +41,7 @@ import { on, emit } from 'jetemit';
 ```
 
 ## use
-**`call`**
+#### call
 ```javascript
 import { emit } from 'jetemit';
 /**
@@ -51,7 +51,7 @@ import { emit } from 'jetemit';
  */
 emit('TIME', '2018-12-01 12:30');
 ```
-**`listener`**
+#### listener
 ```javascript
 import { on } from 'jetemit';
 /**
@@ -62,9 +62,16 @@ on('TIME', time => {
   console.log(time);
 });
 ```
-**`unsubscribe listener`**
-
-Using the function returned from
+```javascript
+import { once } from 'jetemit';
+/**
+ * Like on but run one time
+ */
+once('TIME', time => {
+  console.log(time);
+});
+```
+#### unsubscribe listener
 ```javascript
 import { on } from 'jetemit';
 /**
@@ -76,6 +83,7 @@ const unsubscribe = on('TIME', time => {
 
 unsubscribe();
 ```
+
 Using unsubscribeOf function 
 ```javascript
 import { unsubscribeOf } from 'jetemit';
@@ -85,9 +93,9 @@ import { unsubscribeOf } from 'jetemit';
 unsubscribeOf('TIME')
 
 /**
- * unsubscribe a Function which subscribed for TIME
+ * Unsubscribe a Function which subscribed for TIME
  */
-unsubscribeOf('TIME',someFunction)
+unsubscribeOf('TIME',timeFunction)
 
 unsubscribe();
 ```
