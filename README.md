@@ -1,10 +1,32 @@
-## jetemit
+![jetemit](http://itten.ir/file/jetemit-logo.png)
 
 [![NPM](https://nodei.co/npm/jetemit.png)](https://nodei.co/npm/jetemit/)
 
 [![install size](https://packagephobia.now.sh/badge?p=jetemit)](https://packagephobia.now.sh/result?p=jetemit) [![dependencies](https://david-dm.org/uxitten/jetemit.svg)](https://david-dm.org/uxitten/jetemit.svg)
 
+<a href="https://www.npmjs.com/package/jetemit">
+  <img src="https://img.shields.io/npm/v/jetemit.svg" alt="Version">
+</a>
+
+<a href="https://www.npmjs.com/package/jetemit">
+  <img src="https://img.shields.io/npm/l/jetemit.svg" alt="License">
+</a>
+
+<a href="https://www.npmjs.com/package/jetemit">
+  <img src="https://img.shields.io/npm/dm/jetemit.svg" alt="Downloads">
+</a>
+
+ 
+
 events manager very simple
+
+### Compatibility
+
+|All browser|Backend (Nodejs)|Mobile (React Native)|
+|-----------|----------------|---------------------|
+|✅         |✅               |✅                   |
+
+Compatibility with all javascript project
 
 ## install
 ```npm
@@ -27,7 +49,7 @@ import { emit } from 'jetemit';
  * name is string
  * value any 
  */
-emit('TIME', new Date().toString());
+emit('TIME', '2018-12-01 12:30');
 ```
 
 listener
