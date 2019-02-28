@@ -32,20 +32,20 @@ emit("C", { msg: "bye" });
 
 console.log("Now we will test unsubscribeOf");
 
-function F(arg) {
-  console.log(arg, "F");
+function logA(arg) {
+  console.log(arg, "log A");
 }
-function F2(arg) {
-  console.log(arg, "F2");
+function logB(arg) {
+  console.log(arg, "log B");
 }
-for (let i = 0; i < 10; i++) on("F", F);
+for (let i = 0; i < 10; i++) on("logs", logA);
 
-on("F", F2);
+on("logs", logB);
 
-emit("F", "emit F funtions running");
+emit("logs", "emit logs funtions running");
 
-unsubscribeOf("F", F);
-emit("F", "some F functions are unsubscribed except");
+unsubscribeOf("logs", logA);
+emit("logs", "some logA functions are unsubscribed except");
 
-unsubscribeOf("F");
-emit("F", "There is no function to run");
+unsubscribeOf("logs");
+emit("logs", "There is no function to run");
