@@ -1,4 +1,4 @@
-const { on, once, emit } = require("./index");
+const { on, once, emit, unsubscribeOf } = require("./index");
 
 const unsubscribeA = on("A", arg => {
   if (arg === true) console.log("emit A 1", arg);
@@ -29,3 +29,23 @@ once("C", arg => {
 emit("C", { msg: "hello" });
 emit("C", { msg: "bye" });
 emit("C", { msg: "bye" });
+
+console.log("Now we will test unsubscribeOf");
+
+function logA(arg) {
+  console.log(arg, "log A");
+}
+function logB(arg) {
+  console.log(arg, "log B");
+}
+for (let i = 0; i < 10; i++) on("logs", logA);
+
+on("logs", logB);
+
+emit("logs", "emit logs funtions running");
+
+unsubscribeOf("logs", logA);
+emit("logs", "some logA functions are unsubscribed except");
+
+unsubscribeOf("logs");
+emit("logs", "There is no function to run");
