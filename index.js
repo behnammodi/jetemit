@@ -14,9 +14,7 @@ var subscribes = {};
  * @param {function} func function for call
  * @returns {function} unsubscribe function
  */
-function on(name, func) {
-  if (typeof func !== "function")
-    throw "on(" + name + ", ↴), Second argument is not function, please check";
+function on(name, func) {  
   if (!subscribes[name]) subscribes[name] = { count: 0, funcs: {} };
 
   const key = subscribes[name].count++;
@@ -63,10 +61,9 @@ function emit(name, arg) {
  */
 function unsubscribeOf(name, func) {
   if (func)
-    for (const key in subscribes[name].funcs){
+    for (const key in subscribes[name].funcs)
       if (subscribes[name].funcs[key] === func)
         delete subscribes[name].funcs[key];
-    }
   else delete subscribes[name];
 };
 
