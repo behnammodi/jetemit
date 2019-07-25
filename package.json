@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/uxitten/jetemit/issues"
   },
-  "homepage": "https://github.com/uxitten/jetemit#readme"
+  "homepage": "https://github.com/uxitten/jetemit#readme",
+  "keywords": [
+    "event",
+    "events manager"
+  ]
 }
