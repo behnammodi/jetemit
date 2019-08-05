@@ -28,20 +28,20 @@ events manager very simple
 
 Compatibility with all javascript project
 
-## install
+## Install
 ```npm
 npm install jetemit --save
 ```
 
-## import
+## Import
 ```javascript
 const { on, emit } = require('jetemit');
 //or
 import { on, emit } from 'jetemit';
 ```
 
-## use
-#### call
+## Use
+#### Call
 ```javascript
 import { emit } from 'jetemit';
 /**
@@ -51,7 +51,7 @@ import { emit } from 'jetemit';
  */
 emit('TIME', '2018-12-01 12:30');
 ```
-#### listener
+#### Listener
 ```javascript
 import { on } from 'jetemit';
 /**
@@ -71,7 +71,7 @@ once('TIME', time => {
   console.log(time);
 });
 ```
-#### unsubscribe listener
+#### Unsubscribe listener
 ```javascript
 import { on } from 'jetemit';
 /**
@@ -84,7 +84,7 @@ const unsubscribe = on('TIME', time => {
 unsubscribe();
 ```
 
-Using unsubscribeOf function 
+### Using unsubscribeOf function 
 ```javascript
 import { unsubscribeOf } from 'jetemit';
 /**
