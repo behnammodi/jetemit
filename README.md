@@ -84,7 +84,7 @@ const unsubscribe = on('TIME', time => {
 unsubscribe();
 ```
 
-### Using unsubscribeOf function 
+#### Using unsubscribeOf function 
 ```javascript
 import { unsubscribeOf } from 'jetemit';
 /**
@@ -92,7 +92,7 @@ import { unsubscribeOf } from 'jetemit';
  */
 unsubscribeOf('TIME')
 ```
-or
+#### or
 ```javascript
 /**
  * Unsubscribe a Function which subscribed for TIME
