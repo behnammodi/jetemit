@@ -14,7 +14,7 @@ var subscribes = {};
  * @param {function} func function for call
  * @returns {function} unsubscribe function
  */
-function on(name, func) {  
+function on(name, func) {
   if (!subscribes[name]) subscribes[name] = { count: 0, funcs: {} };
 
   const key = subscribes[name].count++;
@@ -22,7 +22,7 @@ function on(name, func) {
   return function() {
     delete subscribes[name].funcs[key];
   };
-};
+}
 
 /**
  * @description like "on" but just run once
@@ -32,25 +32,28 @@ function on(name, func) {
  * @returns {function} unsubscribe function
  */
 function once(name, func) {
-  var unsubscribe = on(name, function () {
+  var unsubscribe = on(name, function() {
     func.apply(undefined, arguments);
     unsubscribe();
   });
   return unsubscribe;
-};
+}
 
 /**
  * @description dispatch all listener
  * @public
  * @param {string} name name listener
  * @param {any} arg argument for send to on(...)
- * @returns {undefined} nothing
+ * @returns {array} refunds all listen can return data
  */
 function emit(name, arg) {
+  var refunds = [];
   if (subscribes[name])
     for (var func in subscribes[name].funcs)
-      subscribes[name].funcs[func] && subscribes[name].funcs[func](arg);
-};
+      if (subscribes[name].funcs[func])
+        refunds.push(subscribes[name].funcs[func](arg));
+  return refunds;
+}
 
 /**
  * @description unsubscribe listener
@@ -64,8 +67,8 @@ function unsubscribeOf(name, func) {
     for (const key in subscribes[name].funcs)
       if (subscribes[name].funcs[key] === func)
         delete subscribes[name].funcs[key];
-  else delete subscribes[name];
-};
+      else delete subscribes[name];
+}
 
 exports.unsubscribeOf = unsubscribeOf;
 

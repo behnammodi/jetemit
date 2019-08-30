@@ -16,86 +16,128 @@
   <img src="https://img.shields.io/npm/dm/jetemit.svg" alt="Downloads">
 </a>
 
- 
-
 events manager very simple
 
 ### Compatibility
 
-|All browser|Backend (Nodejs)|Mobile (React Native)|
-|-----------|----------------|---------------------|
-|✅         |✅              |✅                   |
+| All browser | Backend (Nodejs) | Mobile (React Native) |
+| ----------- | ---------------- | --------------------- |
+| ✅          | ✅               | ✅                    |
 
 Compatibility with all javascript project
 
 ## install
+
 ```npm
 npm install jetemit --save
 ```
 
 ## import
+
 ```javascript
-const { on, emit } = require('jetemit');
+const { on, emit } = require("jetemit");
 //or
-import { on, emit } from 'jetemit';
+import { on, emit } from "jetemit";
 ```
 
 ## use
+
 #### call
+
 ```javascript
-import { emit } from 'jetemit';
+import { emit } from "jetemit";
 /**
  * emit(name, value);
  * name is string
- * value any 
+ * value any
  */
-emit('TIME', '2018-12-01 12:30');
+emit("TIME", "2018-12-01 12:30");
 ```
+
 #### listener
+
 ```javascript
-import { on } from 'jetemit';
+import { on } from "jetemit";
 /**
  * on(name,function)
  * name is string
  */
-on('TIME', time => {
+on("TIME", time => {
   console.log(time);
 });
 ```
+
 ```javascript
-import { once } from 'jetemit';
+import { once } from "jetemit";
 /**
  * Like on but run one time
  */
-once('TIME', time => {
+once("TIME", time => {
   console.log(time);
 });
 ```
+
 #### unsubscribe listener
+
 ```javascript
-import { on } from 'jetemit';
+import { on } from "jetemit";
 /**
  * on return unsubscribe function
  */
-const unsubscribe = on('TIME', time => {
+const unsubscribe = on("TIME", time => {
   console.log(time);
 });
 
 unsubscribe();
 ```
 
-Using unsubscribeOf function 
+Using unsubscribeOf function
+
 ```javascript
-import { unsubscribeOf } from 'jetemit';
+import { unsubscribeOf } from "jetemit";
 /**
  * Unsubscribe all subscribed functions for TIME
  */
-unsubscribeOf('TIME')
+unsubscribeOf("TIME");
 ```
+
 or
+
 ```javascript
 /**
  * Unsubscribe a Function which subscribed for TIME
  */
-unsubscribeOf('TIME',timeFunction)
+unsubscribeOf("TIME", timeFunction);
+```
+
+#### Refund from all listener
+
+Please see this sample:
+
+```javascript
+// file a.js
+import { on } from "jetemit";
+
+on("CACHE_STSTEM_HEALTH", () => {
+  return { state: "OK", id: "CACHE_SYSTEM_1" };
+});
+
+// file b.jd
+import { on } from "jetemit";
+
+on("CACHE_STSTEM_HEALTH", () => {
+  return { state: "OK", id: "CACHE_SYSTEM_2" };
+});
+
+// file c.js
+import { on, emit } from "jetemit";
+
+const status = emit("CACHE_STSTEM_HEALTH");
+console.log(status);
+/*
+[
+  { state: "OK", id: "CACHE_SYSTEM_1" },
+  { state: "OK", id: "CACHE_SYSTEM_2" }
+]
+*/
 ```
