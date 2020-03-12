@@ -1,70 +1,129 @@
 const { on, once, emit, unsubscribeOf } = require("./index");
 
-const unsubscribeA = on("A", arg => {
-  console.assert(arg === true, "arg is incorrect");
-  console.log("emit A 1", arg);
-});
-
-const unsubscribeB = on("A", arg => {
-  console.assert(arg === true, "arg is incorrect");
-  console.log("emit A 2", arg);
-});
-
-on("B", arg => {
-  console.assert(typeof arg === "number", "arg is incorrect");
-  console.log("emit B", arg);
-});
-
-emit("A", true);
-
-for (let i = 0; i < 10; i++) emit("B", i);
-
-unsubscribeA();
-emit("A", true);
-
-once("C", arg => {
-  console.log("emit C", arg.msg);
-});
-
-emit("C", { msg: "hello" });
-emit("C", { msg: "bye" });
-emit("C", { msg: "bye" });
-
-console.log("Now we will test unsubscribeOf");
-
-function logA(arg) {
-  console.log(arg, "log A");
+function expect(task, condition, desc) {
+  task()
+  if (condition()) console.log('✅', desc);
+  else console.log('❌', desc);
+  return expect;
 }
-function logB(arg) {
-  console.log(arg, "log B");
+
+const INC = 'INC';
+const DEC = 'DEC';
+
+let refunds;
+let counter = 0;
+
+const unsubscribeINC = on(INC, function () {
+  counter++
+  return counter;
+});
+
+function incremental() {
+  counter++
+  return counter;
 }
-for (let i = 0; i < 10; i++) on("logs", logA);
 
-on("logs", logB);
+on(INC, incremental);
 
-emit("logs", "emit logs funtions running");
-
-unsubscribeOf("logs", logA);
-emit("logs", "some logA functions are unsubscribed except");
-
-unsubscribeOf("logs");
-emit("logs", "There is no function to run");
-
-const unsubscribeGetMoney1 = on("getmoney", () => {
-  return 1000;
+once(DEC, function () {
+  counter--;
+  return counter;
 });
 
-const unsubscribeGetMoney2 = on("getmoney", () => {
-  return 2000;
-});
+/**
+ * expectes:
+ * [action]                            [variable]  [result]  [desc]
+ * S1:                                 counter     0         nothing
+ * S2:emit(INC)                        counter     2         two unit
+ * S2.1                                refunds     [1,2]     ...
+ * S3:emit(DEC)                        counter     1         one unit 
+ * S4:unsubscribeINC()                 counter     1         don't effect of anything
+ * S5:emit(INC)                        counter     2         just one more    
+ * S6:emit(DEC)                        counter     2         without any effect beacuse it's once
+ * S7:unsubscribeOf(incremental)       counter     2         don't effect of anything
+ * S8:emit(INC)                        counter     2         without effect beacuse doesn't has listener
+ * S8.1                                refunds     []        ...
+ */
 
-const refunds = emit("getmoney");
-console.log("refunds", refunds);
-console.assert(refunds.length == 2, "refunds error");
 
-unsubscribeGetMoney1();
-unsubscribeGetMoney2();
-
-const refunds2 = emit("getmoney");
-console.log("refunds2", refunds2);
-console.assert(refunds2.length == 0, "refunds2 error");
+expect(
+  function () {
+    // nothing
+  },
+  function () {
+    return counter === 0
+  },
+  'S1'
+)(
+  function () {
+    refunds = emit(INC)
+  },
+  function () {
+    return counter === 2
+  },
+  'S2'
+)(
+  function () {
+    // nothing
+  },
+  function () {
+    return refunds[0] === 1 && refunds[1] === 2 && refunds.length === 2
+  },
+  'S2.1'
+)(
+  function () {
+    emit(DEC)
+  },
+  function () {
+    return counter === 1
+  },
+  'S3'
+)(
+  function () {
+    unsubscribeINC()
+  },
+  function () {
+    return counter === 1
+  },
+  'S4'
+)(
+  function () {
+    emit(INC)
+  },
+  function () {
+    return counter === 2
+  },
+  'S5'
+)(
+  function () {
+    emit(DEC)
+  },
+  function () {
+    return counter === 2
+  },
+  'S6'
+)(
+  function () {
+    unsubscribeOf(INC, incremental)
+  },
+  function () {
+    return counter === 2
+  },
+  'S7'
+)(
+  function () {
+    refunds = emit(INC)
+  },
+  function () {
+    return counter === 2
+  },
+  'S8'
+)(
+  function () {
+    // nothing
+  },
+  function () {
+    return refunds.length === 0
+  },
+  'S8.1'
+);
