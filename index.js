@@ -15,12 +15,12 @@ var subscribes = {};
  * @returns {function} unsubscribe function
  */
 function on(name, func) {
-  if (!subscribes[name]) subscribes[name] = { count: 0, funcs: {} };
-
-  const key = subscribes[name].count++;
-  subscribes[name].funcs[key] = func;
-  return function() {
-    delete subscribes[name].funcs[key];
+  if (!subscribes[name]) subscribes[name] = [];
+  subscribes[name].push(func)
+  return function () {
+    subscribes[name] = subscribes[name].filter(function (f) {
+      return f !== func
+    });
   };
 }
 
@@ -32,7 +32,7 @@ function on(name, func) {
  * @returns {function} unsubscribe function
  */
 function once(name, func) {
-  var unsubscribe = on(name, function() {
+  var unsubscribe = on(name, function () {
     func.apply(undefined, arguments);
     unsubscribe();
   });
@@ -48,10 +48,9 @@ function once(name, func) {
  */
 function emit(name, arg) {
   var refunds = [];
-  if (subscribes[name])
-    for (var func in subscribes[name].funcs)
-      if (subscribes[name].funcs[func])
-        refunds.push(subscribes[name].funcs[func](arg));
+  if (subscribes[name]) subscribes[name].forEach(function (func) {
+    if (func) refunds.push(func(arg));
+  });
   return refunds;
 }
 
@@ -63,11 +62,10 @@ function emit(name, arg) {
  * @returns {undefined} nothing
  */
 function unsubscribeOf(name, func) {
-  if (func)
-    for (const key in subscribes[name].funcs)
-      if (subscribes[name].funcs[key] === func)
-        delete subscribes[name].funcs[key];
-      else delete subscribes[name];
+  if (func) subscribes[name] = subscribes[name].filter(function (f) {
+    return f !== func;
+  });
+  else delete subscribes[name];
 }
 
 exports.unsubscribeOf = unsubscribeOf;
