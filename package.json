@@ -1,0 +1,23 @@
+{
+  "name": "jetemit",
+  "version": "6.0.0",
+  "description": "events manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./index.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uxitten/jetemit.git"
+  },
+  "author": "Behnam Mohammadi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uxitten/jetemit/issues"
+  },
+  "homepage": "https://github.com/uxitten/jetemit#readme",
+  "keywords": [
+    "event",
+    "events manager"
+  ]
+}

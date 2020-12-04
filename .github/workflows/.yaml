@@ -1,0 +1,14 @@
+# Use this yaml in your workflow file for each job
+
+# Triggers
+on: push
+
+# Jobs
+jobs:
+  test_job:
+    name: Test
+    runs-on: [self-hosted, macos]
+    steps:
+    - name: Test Step
+      run: |
+        npm run test
