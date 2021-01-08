@@ -30,17 +30,17 @@ once(DEC, () => {
 });
 
 /**
- * expectes:
+ * expects:
  * [action]                            [variable]  [result]  [desc]
  * S1:                                 counter     0         nothing
  * S2:emit(INC)                        counter     2         two unit
  * S2.1                                refunds     [1,2]     ...
- * S3:emit(DEC)                        counter     1         one unit 
+ * S3:emit(DEC)                        counter     1         one unit
  * S4:unsubscribeINC()                 counter     1         don't effect of anything
- * S5:emit(INC)                        counter     2         just one more    
- * S6:emit(DEC)                        counter     2         without any effect beacuse it's once
+ * S5:emit(INC)                        counter     2         just one more
+ * S6:emit(DEC)                        counter     2         without any effect because it's once
  * S7:unsubscribeOf(incremental)       counter     2         don't effect of anything
- * S8:emit(INC)                        counter     2         without effect beacuse doesn't has listener
+ * S8:emit(INC)                        counter     2         without effect because doesn't has listener
  * S8.1                                refunds     []        ...
  */
 

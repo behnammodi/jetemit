@@ -1,5 +1,3 @@
-![jetemit](http://itten.ir/file/jetemit-logo.png)
-
 [![NPM](https://nodei.co/npm/jetemit.png)](https://nodei.co/npm/jetemit/)
 
 <a href="https://www.npmjs.com/package/jetemit">
@@ -20,7 +18,7 @@
 
 An event manager very simple
 
-### Compatibility
+## Compatibility
 
 | All browser | Backend (Nodejs) | Mobile (React Native) |
 | ----------- | ---------------- | --------------------- |
@@ -31,7 +29,7 @@ Compatibility with all javascript project
 ## Install
 
 ```npm
-npm install jetemit --save
+npm install jetemit
 ```
 
 ## Import
@@ -42,12 +40,13 @@ const { on, emit } = require("jetemit");
 import { on, emit } from "jetemit";
 ```
 
-## Use
+# Use
 
-#### Call
+## Call
 
 ```javascript
 import { emit } from "jetemit";
+
 /**
  * emit(name, value);
  * name is string
@@ -56,10 +55,11 @@ import { emit } from "jetemit";
 emit("TIME", "2018-12-01 12:30");
 ```
 
-#### Listener
+## Listener
 
 ```javascript
 import { on } from "jetemit";
+
 /**
  * on(name,function)
  * name is string
@@ -71,6 +71,7 @@ on("TIME", time => {
 
 ```javascript
 import { once } from "jetemit";
+
 /**
  * Like on but run one time
  */
@@ -79,10 +80,11 @@ once("TIME", time => {
 });
 ```
 
-#### Unsubscribe listener
+## Unsubscribe listener
 
 ```javascript
 import { on } from "jetemit";
+
 /**
  * on return unsubscribe function
  */
@@ -93,26 +95,28 @@ const unsubscribe = on("TIME", time => {
 unsubscribe();
 ```
 
-#### Using unsubscribeOf function
+## Using unsubscribeOf function
 
 ```javascript
 import { unsubscribeOf } from "jetemit";
+
 /**
  * Unsubscribe all subscribed functions for TIME
  */
 unsubscribeOf("TIME");
 ```
 
-#### or
+## or
 
 ```javascript
+
 /**
  * Unsubscribe a Function which subscribed for TIME
  */
 unsubscribeOf("TIME", timeFunction);
 ```
 
-#### Refund from all listener
+## Refund from all listener
 
 Please see this sample:
 
@@ -123,14 +127,16 @@ import { on } from "jetemit";
 on("CACHE_STSTEM_HEALTH", () => {
   return { state: "OK", id: "CACHE_SYSTEM_1" };
 });
-
+```
+```javascript
 // file b.jd
 import { on } from "jetemit";
 
 on("CACHE_STSTEM_HEALTH", () => {
   return { state: "OK", id: "CACHE_SYSTEM_2" };
 });
-
+```
+```javascript
 // file c.js
 import { on, emit } from "jetemit";
 

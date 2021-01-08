@@ -4,20 +4,30 @@
   "description": "events manager",
   "main": "index.js",
   "scripts": {
-    "test": "node ./index.test.js"
+    "test": "node ./index.test.js",
+    "build": "babel src -d ./",
+    "preversion": "npm run test",
+    "version": "npm run build",
+    "postversion": "git push && git push --tags && npm publish"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/uxitten/jetemit.git"
+    "url": "git+https://github.com/behnammodi/jetemit.git"
   },
   "author": "Behnam Mohammadi",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/uxitten/jetemit/issues"
+    "url": "https://github.com/behnammodi/jetemit/issues"
   },
-  "homepage": "https://github.com/uxitten/jetemit#readme",
+  "homepage": "https://github.com/behnammodi/jetemit#readme",
   "keywords": [
     "event",
     "events manager"
-  ]
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "babel-preset-minify": "^0.5.1"
+  }
 }

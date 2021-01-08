@@ -1,9 +1,21 @@
 .github
 
+docs
+
+node_modules
+
+src
+
+.gitignore
+
+.prettierrc
+
+babel.config.json
+
 index.test.js
 
 LICENSE
 
-actions-runner
+package-lock.json
 
-docs
+README.md
