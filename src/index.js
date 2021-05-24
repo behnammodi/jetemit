@@ -61,7 +61,7 @@ function unsubscribeOf(name, func) {
       name,
       subscribes.get(name).filter((f) => f !== func)
     );
-  else subscribes.clear(name);
+  else subscribes.delete(name);
 }
 
 export { on, emit, once, unsubscribeOf }
