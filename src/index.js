@@ -12,7 +12,7 @@ const subscribes = new Map();
  * @returns {function} unsubscribe function
  */
 function on(name, func) {
-  if (!subscribes.has(name)) subscribes.set(name, []);
+  if (!subscribes.get(name)) subscribes.set(name, []);
   subscribes.get(name).push(func);
   return () => unsubscribeOf(name, func);
 }
