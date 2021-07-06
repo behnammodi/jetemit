@@ -56,6 +56,10 @@ function emit(name, arg) {
  * @returns {undefined} nothing
  */
 function unsubscribeOf(name, func) {
+  if (!subscribes.has(name)){
+    return;
+  }
+  
   if (func)
     subscribes.set(
       name,
