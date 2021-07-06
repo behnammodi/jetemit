@@ -59,7 +59,7 @@ function unsubscribeOf(name, func) {
   if (!subscribes.has(name)){
     return;
   }
-  
+
   if (func)
     subscribes.set(
       name,
