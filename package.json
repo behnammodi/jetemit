@@ -25,7 +25,7 @@
     "events manager"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.14.3",
+    "@babel/cli": "^7.12.1",
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.2",
     "babel-preset-minify": "^0.5.1"
