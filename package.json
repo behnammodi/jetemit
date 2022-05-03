@@ -1,6 +1,6 @@
 {
   "name": "jetemit",
-  "version": "7.0.2",
+  "version": "7.0.3",
   "description": "events manager",
   "main": "index.js",
   "scripts": {
