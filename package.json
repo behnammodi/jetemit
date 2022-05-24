@@ -6,6 +6,7 @@
   "scripts": {
     "test": "node ./index.test.js",
     "build": "babel src -d ./",
+    "jsDoc": "jsdoc -c jsdoc.conf.json",
     "types": "npx -p typescript tsc src/index.js --declaration --allowJs --emitDeclarationOnly --outDir types",
     "preversion": "npm run build && npm run test",
     "postversion": "git push && git push --tags && npm publish"
@@ -28,6 +29,8 @@
     "@babel/cli": "^7.12.1",
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.2",
-    "babel-preset-minify": "^0.5.1"
+    "babel-preset-minify": "^0.5.1",
+    "jsdoc": "^3.6.10",
+    "tui-jsdoc-template": "^1.2.2"
   }
 }
