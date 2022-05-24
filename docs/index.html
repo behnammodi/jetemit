@@ -1,8 +1,217 @@
-<html>
-  <head>
-    <title>jetemit playground</title>
-  </head>
-  <body>
-    <h1>Coming soon</h1>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Home | Jetemit</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="">
+        
+            <img src="img/toast-ui.png" width="100%" height="100%">
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">Jetemit</a></h1>
+        
+            <span class="version">v7.0.3</span>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+    <div class="lnb-api hidden"><h3>Global</h3><ul><li><a href="global.html#emit">emit</a></li><li><a href="global.html#on">on</a></li><li><a href="global.html#once">once</a></li><li><a href="global.html#unsubscribeOf">unsubscribeOf</a></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section>
+        <article class="readme"><p><a href="https://nodei.co/npm/jetemit/"><img src="https://nodei.co/npm/jetemit.png" alt="NPM"></a></p>
+<a href="https://www.npmjs.com/package/jetemit">
+  <img src="https://img.shields.io/npm/v/jetemit.svg" alt="Version">
+</a>
+<a href="https://bundlephobia.com/result?p=jetemit">
+<img src="https://badgen.net/bundlephobia/minzip/jetemit" alt="Minzipped size">
+</a>
+<a href="https://www.npmjs.com/package/jetemit">
+  <img src="https://badgen.net/npm/dt/jetemit" alt="Downloads">
+</a>
+<a href="https://www.npmjs.com/package/jetemit">
+  <img src="https://img.shields.io/npm/l/jetemit.svg" alt="License">
+</a>
+<p>An event manager very simple</p>
+<h2>Compatibility</h2>
+<table>
+<thead>
+<tr>
+<th>All browser</th>
+<th>Backend (Nodejs)</th>
+<th>Mobile (React Native)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<p>Compatibility with all javascript project</p>
+<h2>Install</h2>
+<pre class="prettyprint source lang-npm"><code>npm install jetemit
+</code></pre>
+<h2>Import</h2>
+<pre class="prettyprint source lang-javascript"><code>const { on, emit } = require(&quot;jetemit&quot;);
+//or
+import { on, emit } from &quot;jetemit&quot;;
+</code></pre>
+<h1>Use</h1>
+<h2>Call</h2>
+<pre class="prettyprint source lang-javascript"><code>import { emit } from &quot;jetemit&quot;;
+
+/**
+ * emit(name, value);
+ * name is string
+ * value any
+ */
+emit(&quot;TIME&quot;, &quot;2018-12-01 12:30&quot;);
+</code></pre>
+<h2>Listener</h2>
+<pre class="prettyprint source lang-javascript"><code>import { on } from &quot;jetemit&quot;;
+
+/**
+ * on(name,function)
+ * name is string
+ */
+on(&quot;TIME&quot;, time => {
+  console.log(time);
+});
+</code></pre>
+<pre class="prettyprint source lang-javascript"><code>import { once } from &quot;jetemit&quot;;
+
+/**
+ * Like on but run one time
+ */
+once(&quot;TIME&quot;, time => {
+  console.log(time);
+});
+</code></pre>
+<h2>Unsubscribe listener</h2>
+<pre class="prettyprint source lang-javascript"><code>import { on } from &quot;jetemit&quot;;
+
+/**
+ * on return unsubscribe function
+ */
+const unsubscribe = on(&quot;TIME&quot;, time => {
+  console.log(time);
+});
+
+unsubscribe();
+</code></pre>
+<h2>Using unsubscribeOf function</h2>
+<pre class="prettyprint source lang-javascript"><code>import { unsubscribeOf } from &quot;jetemit&quot;;
+
+/**
+ * Unsubscribe all subscribed functions for TIME
+ */
+unsubscribeOf(&quot;TIME&quot;);
+</code></pre>
+<h2>or</h2>
+<pre class="prettyprint source lang-javascript"><code>
+/**
+ * Unsubscribe a Function which subscribed for TIME
+ */
+unsubscribeOf(&quot;TIME&quot;, timeFunction);
+</code></pre>
+<h2>Refund from all listener</h2>
+<p>Please see this sample:</p>
+<pre class="prettyprint source lang-javascript"><code>// file a.js
+import { on } from &quot;jetemit&quot;;
+
+on(&quot;CACHE_STSTEM_HEALTH&quot;, () => {
+  return { state: &quot;OK&quot;, id: &quot;CACHE_SYSTEM_1&quot; };
+});
+</code></pre>
+<pre class="prettyprint source lang-javascript"><code>// file b.jd
+import { on } from &quot;jetemit&quot;;
+
+on(&quot;CACHE_STSTEM_HEALTH&quot;, () => {
+  return { state: &quot;OK&quot;, id: &quot;CACHE_SYSTEM_2&quot; };
+});
+</code></pre>
+<pre class="prettyprint source lang-javascript"><code>// file c.js
+import { on, emit } from &quot;jetemit&quot;;
+
+const status = emit(&quot;CACHE_STSTEM_HEALTH&quot;);
+console.log(status);
+/*
+[
+  { state: &quot;OK&quot;, id: &quot;CACHE_SYSTEM_1&quot; },
+  { state: &quot;OK&quot;, id: &quot;CACHE_SYSTEM_2&quot; }
+]
+*/
+</code></pre>
+<h2>Donate</h2>
+<p>BTC: <code>1NV1sjQnXwuyHgxQ8G5eWprhxsD5A8yN6r</code></p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="img/toast-ui.png" style="">
+    <div class="footer-text">NHN Entertainment. Frontend Development Lab</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = 'package:jetemit_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
 </html>

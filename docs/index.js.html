@@ -1,0 +1,151 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Source: index.js | Jetemit</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="">
+        
+            <img src="img/toast-ui.png" width="100%" height="100%">
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">Jetemit</a></h1>
+        
+            <span class="version">v7.0.3</span>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+    <div class="lnb-api hidden"><h3>Global</h3><ul><li><a href="global.html#emit">emit</a></li><li><a href="global.html#on">on</a></li><li><a href="global.html#once">once</a></li><li><a href="global.html#unsubscribeOf">unsubscribeOf</a></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @description subscribes repo
+ * @private
+ */
+const subscribes = new Map();
+
+/**
+ * @description add listener
+ * @public
+ * @param {string} name name listener
+ * @param {function} func function for call
+ * @returns {function} unsubscribe function
+ */
+function on(name, func) {
+  if (!subscribes.has(name)) subscribes.set(name, []);
+  subscribes.get(name).push(func);
+  return () => unsubscribeOf(name, func);
+}
+
+/**
+ * @description like "on" but just run once
+ * @public
+ * @param {string} name name listener
+ * @param {function} func function for call
+ * @returns {function} unsubscribe function
+ */
+function once(name, func) {
+  const unsubscribe = on(name, function () {
+    func.apply(undefined, arguments);
+    unsubscribe();
+  });
+  return unsubscribe;
+}
+
+/**
+ * @description dispatch all listener
+ * @public
+ * @param {string} name name listener
+ * @param {any} arg argument for send to on(...)
+ * @returns {array} refunds all listen can return data
+ */
+function emit(name, arg) {
+  const refunds = [];
+  if (subscribes.has(name))
+    subscribes.get(name).forEach((func) => {
+      if (func) refunds.push(func(arg));
+    });
+  return refunds;
+}
+
+/**
+ * @description unsubscribe listener
+ * @public
+ * @param {string} name name listener
+ * @param {function} func the function that you want to unsubscribe If not defined, all subscriptions will be canceled
+ * @returns {undefined} nothing
+ */
+function unsubscribeOf(name, func) {
+  if (!subscribes.has(name)){
+    return;
+  }
+
+  if (func)
+    subscribes.set(
+      name,
+      subscribes.get(name).filter((f) => f !== func)
+    );
+  else subscribes.delete(name);
+}
+
+export { on, emit, once, unsubscribeOf }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="img/toast-ui.png" style="">
+    <div class="footer-text">NHN Entertainment. Frontend Development Lab</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = '_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
+</html>
